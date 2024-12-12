@@ -1,0 +1,8 @@
+name: assembly
+channels:
+  - conda-forge
+  - bioconda
+  - main
+dependencies:
+  - hifiasm=0.19.8=h43eeafb_0
+  - yak=0.1=h5bf99c6_1

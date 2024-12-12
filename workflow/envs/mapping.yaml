@@ -1,0 +1,8 @@
+name: mapping
+channels:
+  - conda-forge
+  - bioconda
+  - main
+dependencies:
+  - pbmm2=1.9.0
+  - samtools=1.15.1

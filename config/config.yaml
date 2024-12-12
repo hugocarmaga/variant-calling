@@ -1,0 +1,17 @@
+# Path to FASTQ files with HiFi sequencing reads. Feel free to change "nameX" to your sample name, but don't change "sample"/"paternal"/"maternal".
+reads:
+  name1:
+    sample: ["/path/to/fastq1.fq", "/path/to/fastq2.fq"]
+    paternal: ["/path/to/fastq1.fq", "/path/to/fastq2.fq"]
+    maternal: ["/path/to/fastq1.fq", "/path/to/fastq2.fq"]
+  name2:
+    sample: ["/path/to/fastq1.fq", "/path/to/fastq2.fq"]
+    paternal: ["/path/to/fastq1.fq", "/path/to/fastq2.fq"]
+    maternal: ["/path/to/fastq1.fq", "/path/to/fastq2.fq"]
+
+# Path to reference genome(s) must be provided. Please make sure references are indexed and a .fai file is present in the same directory.
+references:
+  chm13: "/path/to/ref/ref.fa"
+
+# List of variant callers to use. At the moment, only "PAV" and "Sniffles" are possible.
+callers: ["pav", "sniffles"]
