@@ -1,5 +1,5 @@
 # Variant (SV) calling pipeline
-This pipeline was made to be used in https://doi.org/10.1101/2024.04.18.590093. It takes FASTQ files from a sample and optionally from its parents (see config) as an input and it outputs SV VCFs from [Sniffles], [Phased Aseebmly Variant Caller (PAV)] or both (see config). Additional VCFs without SVs found in the [centromere/satellite repeat annotation (Cen/Sat)] regions are also produced.
+This pipeline was made to be used in https://doi.org/10.1101/2024.04.18.590093. It takes FASTQ files from a sample and optionally from its parents (see config) as an input and it outputs SV VCFs from [Sniffles], [Phased Assembly Variant Caller (PAV)] or both (see config). Additional VCFs without SVs found in the [centromere/satellite repeat annotation (Cen/Sat)] regions are also produced.
 
 ## System Requirements
 
