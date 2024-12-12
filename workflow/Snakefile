@@ -7,14 +7,10 @@ TRIO_SAMPLES = [i for i in config["reads"].keys() if config["reads"][i]["paterna
 NO_TRIO_SAMPLES = [i for i in config["reads"].keys() if not (config["reads"][i]["paternal"] and config["reads"][i]["maternal"])]
 
 
-
-
 rule all:
     input:
         #expand("results/assemblies/{sample}/sample.asm.dip.hap1.p_ctg.gfa", sample = [i for i in TRIO_SAMPLES]),
-        #expand("results/assemblies/{sample}/{member}.asm.bp.hap1.p_ctg.gfa", sample = [i for i in TRIO_SAMPLES], member = ["paternal", "maternal"]),
         #expand("results/assemblies/{sample}/sample.asm.bp.hap1.p_ctg.gfa", sample = [i for i in NO_TRIO_SAMPLES]),
-        #expand("results/{ref}/variant-calling/{sample}/pav/data/input/sample.asm.dip.{hap}.p_ctg.fa", ref = config["references"].keys(), sample = [i for i in TRIO_SAMPLES], hap = ["hap1", "hap2"])
         expand("results/{ref}/variant-calling/{sample}/{folder}/svs_{sample}-{ref}-pav.filter-censat.vcf.gz", ref = [i for i in config["references"].keys()], sample = [i for i in TRIO_SAMPLES], folder = "pav-dip"),
         expand("results/{ref}/variant-calling/{sample}/{folder}/svs_{sample}-{ref}-pav.filter-censat.vcf.gz", ref = [i for i in config["references"].keys()], sample = [i for i in NO_TRIO_SAMPLES], folder = "pav-bp"),
         expand("results/{ref}/variant-calling/{sample}/{folder}/svs_{sample}-{ref}-sniffles.filter-censat.vcf.gz", ref = [i for i in config["references"].keys()], sample = [i for i in config["reads"].keys()], folder = "sniffles")
