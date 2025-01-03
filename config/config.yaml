@@ -9,7 +9,7 @@ reads:
     paternal: ["/path/to/fastq1.fq", "/path/to/fastq2.fq"]
     maternal: ["/path/to/fastq1.fq", "/path/to/fastq2.fq"]
 
-# Path to reference genome(s) must be provided. Please make sure references are indexed and a .fai file is present in the same directory.
+# Path to reference genome(s) must be provided. Please make sure references are indexed and a .fai file is present in the same directory. Make sure FASTA file is not gzipped, as pbmm2 doesn't support gzipped fasta files
 references:
   chm13: "/path/to/ref/ref.fa"
 

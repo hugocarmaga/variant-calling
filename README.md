@@ -20,7 +20,7 @@ The pipeline is run with snakemake and the dependencies of each rule is resolved
 
 This pipeline requires FASTQ files as an input, and it is optimised for PacBio HiFi reads. SV calling with PAV can be improved by providing parental HiFi reads, which will then be used to generate genome assemblies using [hifiasm]'s trio binning mode (together with [yak]). Lists of FASTQ file names should be provided in the `config/config.yaml` as demonstrated there. You can obviously replace `name1` and `name2` by your sample's names, but please don't change `sample`/`paternal`/`maternal`, as this will cause the pipeline to fail.
 
-Additionally, you need to provide (a) reference genome(s) to have your variants called against (see config).
+Additionally, you need to provide (a) reference genome(s) to have your variants called against (see config). The reference(s) can't be gzipped, as pbmm2 doesn't support it.
 
 Lastly, you need to specify the list of callers you want to call SVs with. Right now, the available callers are:
 - [Sniffles]
