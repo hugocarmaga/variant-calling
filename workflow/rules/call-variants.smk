@@ -41,21 +41,24 @@ rule prepare_pav_config:
     output:
         json = "results/{ref}/variant-calling/{sample}/{folder}/config.json"
     run:
-        ref = input.fasta
+        import os
+        ref = os.path.basename(input.fasta)
         with open(output.json, 'w') as outfile:
             outfile.write("{\n")
-            outfile.write("\t\"reference\": \"{}\"\n".format(ref))
+            outfile.write("\t\"reference\": \"input/ref/{}\"\n".format(ref))
             outfile.write("}\n")
 
 rule run_pav:
     input:
         tsv = "results/{ref}/variant-calling/{sample}/{folder}/assemblies.tsv",
-        pav_config = "results/{ref}/variant-calling/{sample}/{folder}/config.json"
+        pav_config = "results/{ref}/variant-calling/{sample}/{folder}/config.json",
+        fasta = lambda wildcards: config["references"][wildcards.ref]
     output:
         complete = "results/{ref}/variant-calling/{sample}/{folder}/run.complete",
         vcf = "results/{ref}/variant-calling/{sample}/{folder}/pav_{sample}.vcf.gz"
     params:
-        wdir = "results/{ref}/variant-calling/{sample}/{folder}/"
+        wdir = "results/{ref}/variant-calling/{sample}/{folder}/",
+        outref = "results/{ref}/variant-calling/{sample}/{folder}/input/ref/"
     log:
         "results/{ref}/variant-calling/{sample}/{folder}/pav.log"
     benchmark:
@@ -70,6 +73,8 @@ rule run_pav:
         "workflow/container/pav_2.3.4.sif"
     shell:
         """
+        mkdir -p {params.outref}
+        cp {input.fasta}* {params.outref}
         snakemake --verbose --jobs {threads} -d {params.wdir} -s /opt/pav/Snakefile --rerun-incomplete --restart-times 0 --notemp &> {log} && touch {output.complete}
         """
 

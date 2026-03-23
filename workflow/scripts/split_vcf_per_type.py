@@ -11,18 +11,20 @@ def parse_arguments():
 
 def split_vcf_per_type(file):
 
+    working_dir = os.path.dirname(file)
+
     if file.split(".")[-1]=="gz":
         vcf = gzip.open(file,'rt')
         file = os.path.basename(file)
-        out_snps = open("snps_"+file[:-3], 'w')
-        out_indels = open("indels_"+file[:-3], 'w')
-        out_svs = open("svs_"+file[:-3], 'w')
+        out_snps = open(os.path.join(working_dir, "snps_" + file[:-3]), 'w')
+        out_indels = open(os.path.join(working_dir, "indels_" + file[:-3]), 'w')
+        out_svs = open(os.path.join(working_dir, "svs_" + file[:-3]), 'w')
     else:
         file = os.path.basename(file)
         vcf = open(file,'r')
-        out_snps = open("snps_"+file, 'w')
-        out_indels = open("indels_"+file, 'w')
-        out_svs = open("svs_"+file, 'w')
+        out_snps = open(os.path.join(working_dir, "snps_" + file), 'w')
+        out_indels = open(os.path.join(working_dir, "indels_" + file), 'w')
+        out_svs = open(os.path.join(working_dir, "svs_" + file), 'w')
 
     for line in vcf:
         if line.startswith("#"):
